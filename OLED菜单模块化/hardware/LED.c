@@ -1,130 +1,130 @@
 #include "stm32f10x.h"                  // Device header
 
 /**
-  * @brief  Initialize LED GPIO port
-  * @param  None
-  * @retval None
+  * @brief  初始化LED GPIO端口
+  * @param  无
+  * @retval 无
  **/
 void LED_Init(void)
 {
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);  // Enable GPIOA clock
-	
-	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;       // Configure as push-pull output mode
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2| GPIO_Pin_0; // Configure pins 1, 2, and 0
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;       // Set GPIO speed to 50MHz
-	GPIO_Init(GPIOA, &GPIO_InitStructure);                 // Initialize GPIOA
-	
-	GPIO_SetBits(GPIOA, GPIO_Pin_1 | GPIO_Pin_2| GPIO_Pin_0);          // Default to turn off LEDs (set high level)
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);  // 使能GPIOA时钟
+    
+    GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;       // 配置为推挽输出模式
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_0; // 配置引脚1, 2和0
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;      // 设置GPIO速度为50MHz
+    GPIO_Init(GPIOA, &GPIO_InitStructure);                 // 初始化GPIOA
+    
+    GPIO_SetBits(GPIOA, GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_0); // 默认关闭LED（设置高电平）
 }
 
 /**
-  * @brief  Turn on LED1 (light up LED1)
-  * @param  None
-  * @retval None
+  * @brief  打开LED1（点亮LED1）
+  * @param  无
+  * @retval 无
  **/
 void LED1_ON(void)
 {
-	GPIO_ResetBits(GPIOA, GPIO_Pin_2);  // Set low level to light up LED1
+    GPIO_ResetBits(GPIOA, GPIO_Pin_2);  // 设置低电平点亮LED1
 }
 
 /**
-  * @brief  Turn off LED1 (turn off LED1)
-  * @param  None
-  * @retval None
+  * @brief  关闭LED1（熄灭LED1）
+  * @param  无
+  * @retval 无
  **/
 void LED1_OFF(void)
 {
-	GPIO_SetBits(GPIOA, GPIO_Pin_2);    // Set high level to turn off LED1
+    GPIO_SetBits(GPIOA, GPIO_Pin_2);    // 设置高电平熄灭LED1
 }
 
 /**
-  * @brief  Toggle LED1 state (if LED1 is on, turn it off; if it's off, turn it on)
-  * @param  None
-  * @retval None
+  * @brief  切换LED1状态（如果LED1亮，则熄灭；如果LED1灭，则点亮）
+  * @param  无
+  * @retval 无
  **/
 void LED1_Turn(void)
 {
-	if (GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_2) == 0) // Check current state of LED1
-	{
-		GPIO_SetBits(GPIOA, GPIO_Pin_2);    // Current is low level, set to high level to turn off LED1
-	}
-	else
-	{
-		GPIO_ResetBits(GPIOA, GPIO_Pin_2);  // Current is high level, set to low level to light up LED1
-	}
+    if (GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_2) == 0)    // 检查LED1当前状态
+    {
+        GPIO_SetBits(GPIOA, GPIO_Pin_2);    // 当前为低电平，设置为高电平熄灭LED1
+    }
+    else
+    {
+        GPIO_ResetBits(GPIOA, GPIO_Pin_2);  // 当前为高电平，设置为低电平点亮LED1
+    }
 }
 
 /**
-  * @brief  Turn on LED2 (light up LED2)
-  * @param  None
-  * @retval None
+  * @brief  打开LED2（点亮LED2）
+  * @param  无
+  * @retval 无
  **/
 void LED2_ON(void)
 {
-	GPIO_ResetBits(GPIOA, GPIO_Pin_1);  // Set low level to light up LED2
+    GPIO_ResetBits(GPIOA, GPIO_Pin_1);  // 设置低电平点亮LED2
 }
 
 /**
-  * @brief  Turn off LED2 (turn off LED2)
-  * @param  None
-  * @retval None
+  * @brief  关闭LED2（熄灭LED2）
+  * @param  无
+  * @retval 无
  **/
 void LED2_OFF(void)
 {
-	GPIO_SetBits(GPIOA, GPIO_Pin_1);    // Set high level to turn off LED2
+    GPIO_SetBits(GPIOA, GPIO_Pin_1);    // 设置高电平熄灭LED2
 }
 
 /**
-  * @brief  Toggle LED2 state (if LED2 is on, turn it off; if it's off, turn it on)
-  * @param  None
-  * @retval None
+  * @brief  切换LED2状态（如果LED2亮，则熄灭；如果LED2灭，则点亮）
+  * @param  无
+  * @retval 无
  **/
 void LED2_Turn(void)
 {
-	if (GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_1) == 0) // Check current state of LED2
-	{
-		GPIO_SetBits(GPIOA, GPIO_Pin_1);    // Current is low level, set to high level to turn off LED2
-	}
-	else
-	{
-		GPIO_ResetBits(GPIOA, GPIO_Pin_1);  // Current is high level, set to low level to light up LED2
-	}
+    if (GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_1) == 0)    // 检查LED2当前状态
+    {
+        GPIO_SetBits(GPIOA, GPIO_Pin_1);    // 当前为低电平，设置为高电平熄灭LED2
+    }
+    else
+    {
+        GPIO_ResetBits(GPIOA, GPIO_Pin_1);  // 当前为高电平，设置为低电平点亮LED2
+    }
 }
 
 /**
-  * @brief  Turn on LED3 (light up LED3)
-  * @param  None
-  * @retval None
+  * @brief  打开LED3（点亮LED3）
+  * @param  无
+  * @retval 无
  **/
 void LED3_ON(void)
 {
-	GPIO_ResetBits(GPIOA, GPIO_Pin_0);  // Set low level to light up LED3
+    GPIO_ResetBits(GPIOA, GPIO_Pin_0);  // 设置低电平点亮LED3
 }
 
 /**
-  * @brief  Turn off LED3 (turn off LED3)
-  * @param  None
-  * @retval None
+  * @brief  关闭LED3（熄灭LED3）
+  * @param  无
+  * @retval 无
  **/
 void LED3_OFF(void)
 {
-	GPIO_SetBits(GPIOA, GPIO_Pin_0);    // Set high level to turn off LED3
+    GPIO_SetBits(GPIOA, GPIO_Pin_0);    // 设置高电平熄灭LED3
 }
 
 /**
-  * @brief  Toggle LED3 state (if LED3 is on, turn it off; if it's off, turn it on)
-  * @param  None
-  * @retval None
+  * @brief  切换LED3状态（如果LED3亮，则熄灭；如果LED3灭，则点亮）
+  * @param  无
+  * @retval 无
  **/
 void LED3_Turn(void)
 {
-	if (GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_0) == 0) // Check current state of LED3
-	{
-		GPIO_SetBits(GPIOA, GPIO_Pin_0);    // Current is low level, set to high level to turn off LED3
-	}
-	else
-	{
-		GPIO_ResetBits(GPIOA, GPIO_Pin_0);  // Current is high level, set to low level to light up LED3
-	}
+    if (GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_0) == 0)    // 检查LED3当前状态
+    {
+        GPIO_SetBits(GPIOA, GPIO_Pin_0);    // 当前为低电平，设置为高电平熄灭LED3
+    }
+    else
+    {
+        GPIO_ResetBits(GPIOA, GPIO_Pin_0);  // 当前为高电平，设置为低电平点亮LED3
+    }
 }

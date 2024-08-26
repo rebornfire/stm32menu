@@ -7,6 +7,7 @@
 
 
 
+
 extern uint8_t KeyNum;
 extern uint8_t index_1;
 extern uint8_t last_index_1;
@@ -23,25 +24,25 @@ int main(void)
     {
         OLED_Clear();//二级菜单回一级菜单时刷新
         menu_1();
-        /*//进入二级菜单时重新刷新索引
-        index_2=1;
-        last_index_2=1;*/
         OLED_Clear();//一级菜单进二级菜单时刷新
         switch(index_1)
         {
-            case 1:
+            case 0:
                 menu_2_chat();
                 break;
-            case 2:
+            case 1:
                 menu_2_game();
                 break;
-            case 3:
+            case 2:
                 menu_2_setting();
                 OLED_Clear();
                 switch(index_2)
                 {
-                    case 1:
+                    case 0:
                         menu_3_setting_light();
+                        break;
+                    case 1:
+                        menu_3_setting_pwm();
                         break;
                 }
 

@@ -8,5 +8,6 @@ void menu_2_game(void);
 void menu_2_chat(void);
 void menu_2_setting(void);
 void menu_3_setting_light(void);
+void menu_3_setting_pwm(void);
 #endif
 
