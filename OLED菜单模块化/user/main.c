@@ -5,26 +5,30 @@
 #include "menu.h"
 #include "LED.h"
 
-
-
-
 extern uint8_t KeyNum;
-extern uint8_t index_1;
-extern uint8_t last_index_1;
-extern uint8_t index_2;
-extern uint8_t last_index_2;
-
-
+extern int8_t index_1;
+extern int8_t last_index_1;
+extern int8_t index_2;
+extern int8_t last_index_2;
+/* 总体过程便是轮询系统,从一级菜单轮询到末级菜单,
+再从末级菜单轮询到一级菜单,根据menu.c里设置的状态
+进行菜单切换 */
+/**
+  * @brief  主函数
+  * @param  无
+  * @retval 无
+ **/
 int main(void)
 {
     LED_Init();
     OLED_Init();
     Key_Init();
+    
     while(1)
     {
-        OLED_Clear();//二级菜单回一级菜单时刷新
+        OLED_Clear(); // 下级菜单回上级菜单时刷新
         menu_1();
-        OLED_Clear();//一级菜单进二级菜单时刷新
+        OLED_Clear(); // 上级菜单进下级菜单时刷新
         switch(index_1)
         {
             case 0:
@@ -45,7 +49,8 @@ int main(void)
                         menu_3_setting_pwm();
                         break;
                 }
-
+                break;
+            default:
                 break;
         }
     }
